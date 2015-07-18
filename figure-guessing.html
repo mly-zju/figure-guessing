@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>figure-guessing game!</title>
+<style>
+div{
+text-align:center;
+background-color:#ffff99;
+border:6px outset blue;
+margin-left:auto;
+padding:9px;
+float:left;
+}
+img{
+height:100px;
+margin:2px;
+border:3px groove #00ff66;
+opacity:0.4;
+}
+ul{
+list-style-type:none;
+margin:auto;
+margin-bottom:5px;
+position:relative;
+left:80px;
+}
+li{
+display:inline;
+}
+span{
+float:left;
+padding:3px;
+background-color:red;
+color:white;
+width:70px;
+}
+</style>
+</head>
+<body>
+<div>
+<b>Computer</b><br/>
+<img src="rock.jpg" alt="rock" style="opacity:1.0"><br/>
+<b>Player</b><br/>
+<img src="scissor.jpg" id="scissor"  onmouseover="myover(this)" onmouseout="myout(this)" onclick="myclick(this)">
+<img src="rock.jpg" id="rock" onmouseover="myover(this)" onmouseout="myout(this)" onclick="myclick(this)">
+<img src="paper.jpg" id="paper"  onmouseover="myover(this)" onmouseout="myout(this)" onclick="myclick(this)"><br>
+<ul>
+<li><span><b>Win</b></span></li>
+<li><span><b>Draw</b></span></li>
+<li><span><b>Lose</b></span></li>
+</ul>
+<ul style="clear:left">
+<li><span id="win"><b>0</b></span></li>
+<li><span id="draw"><b>0</b></span></li>
+<li><span id="lose"><b>0</b></span></li>
+</ul>
+</div>
+
+<script>
+var i=0;
+var w=0,d=0,l=0;
+x=document.getElementsByTagName("img")[0];
+function myover(obj)
+{
+	obj.style.opacity="1.0";
+}
+function myout(obj)
+{
+	obj.style.opacity="0.4";
+}
+function myclick(obj)
+{
+    //console.log(obj.src.toString());
+	if(obj.id=="scissor")	
+		switch(i%3)
+		{
+			case 0:
+			//x.src="scissor.jpg";
+			alert("Draw!");
+			document.getElementById("draw").innerHTML=++d;
+			break;
+			case 1:
+			//x.src="rock.jpg";
+			alert("Lose!");
+			document.getElementById("lose").innerHTML=++l;
+			break;
+			case 2:
+			//x.src="paper.jpg";
+			alert("Win!");
+			document.getElementById("win").innerHTML=++w;
+			break;
+		}
+	else if(obj.id=="rock")
+		switch(i%3)
+		{
+			case 0:
+			//x.src="scissor.jpg";
+			alert("Win!");
+			document.getElementById("win").innerHTML=++w;
+			break;
+			case 1:
+			//x.src="rock.jpg";
+			alert("Draw");
+			document.getElementById("draw").innerHTML=++d;
+			break;
+			case 2:
+			//x.src="paper.jpg";
+			alert("Lose!");
+			document.getElementById("lose").innerHTML=++l;
+			break;
+		}
+	else if(obj.id=="paper")
+		switch(i%3)
+		{
+			case 0:
+			//x.src="scissor.jpg";
+			alert("Lose!");
+			document.getElementById("lose").innerHTML=++l;
+			break;
+			case 1:
+			//x.src="rock.jpg";
+			alert("Win!");
+			document.getElementById("win").innerHTML=++w;
+			break;
+			case 2:
+			//x.src="paper.jpg";
+			alert("Draw!");
+			document.getElementById("draw").innerHTML=++d;
+			break;
+		}
+}
+function myload()
+{	
+	i=i+1;
+	m=i%3;
+	//console.log(m);
+	switch(m)
+	{
+		case 0:
+		x.src="scissor.jpg";
+		break;
+		case 1:
+		x.src="rock.jpg";
+		break;
+		case 2:
+		x.src="paper.jpg";
+		break;
+	}
+	t=setTimeout(function(){myload()},100);
+}
+myload();
+</script>
+</body>
+</html>
